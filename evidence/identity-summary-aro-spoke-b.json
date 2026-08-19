@@ -1,0 +1,18 @@
+{
+  "api": "https://api.fwpgmd1x.eastus.aroapp.io:6443/",
+  "console": "https://console-openshift-console.apps.fwpgmd1x.eastus.aroapp.io/",
+  "identity": "UserAssigned",
+  "pwiKeys": [
+    "aro-operator",
+    "cloud-controller-manager",
+    "cloud-network-config",
+    "disk-csi-driver",
+    "file-csi-driver",
+    "image-registry",
+    "ingress",
+    "machine-api"
+  ],
+  "spProfile": null,
+  "state": "Succeeded",
+  "version": "4.19.24"
+}

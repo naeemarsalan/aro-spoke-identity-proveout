@@ -1,0 +1,30 @@
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="a591225f-12d7-4518-b77b-dfe7669b9412"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="e46f4594-1ced-4039-8363-e13263e0a82a"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="13aae5b6-9f41-42e4-a1c3-0048265f27a6"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="63ed82a6-bf1d-4ca7-80ca-7beadf718253"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="b8129033-79d1-47db-bb83-431abac15a7f"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="eed31257-e643-45f5-b816-94b098ab71c0"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="99ca0a31-c1f3-4980-b8b6-0af8bc55824a"
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema

@@ -1,0 +1,13 @@
+[
+  {
+    "audiences": [
+      "openshift"
+    ],
+    "id": "/subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe/resourcegroups/openenv-ftcqh/providers/Microsoft.ManagedIdentity/userAssignedIdentities/machine-api/federatedIdentityCredentials/aro-spoke-b_machine-api-controllers_2r0bos6laofttj5ab8ncqbjulla51pnqmfw4o9slx2yn",
+    "issuer": "https://eastus.oic.aro.azure.com/64dc69e4-d083-49fc-9569-ebece1dd1408/3daaa256-9628-4bf6-a438-988f1b34ed3f",
+    "name": "aro-spoke-b_machine-api-controllers_2r0bos6laofttj5ab8ncqbjulla51pnqmfw4o9slx2yn",
+    "resourceGroup": "openenv-ftcqh",
+    "subject": "system:serviceaccount:openshift-machine-api:machine-api-controllers",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities/federatedIdentityCredentials"
+  }
+]

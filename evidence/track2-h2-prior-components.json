@@ -1,0 +1,92 @@
+[
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "assisted-service"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "cluster-lifecycle"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "cluster-manager"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "discovery"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "hive"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "server-foundation"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "cluster-proxy-addon"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "local-cluster"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "hypershift-local-hosting"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "hypershift"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "managedserviceaccount"
+  },
+  {
+    "configOverrides": {},
+    "enabled": false,
+    "name": "cluster-api"
+  },
+  {
+    "configOverrides": {},
+    "enabled": false,
+    "name": "cluster-api-provider-aws"
+  },
+  {
+    "configOverrides": {},
+    "enabled": false,
+    "name": "cluster-api-provider-azure-preview"
+  },
+  {
+    "configOverrides": {},
+    "enabled": false,
+    "name": "cluster-api-provider-metal3"
+  },
+  {
+    "configOverrides": {},
+    "enabled": false,
+    "name": "cluster-api-provider-openshift-assisted"
+  },
+  {
+    "configOverrides": {},
+    "enabled": false,
+    "name": "image-based-install-operator"
+  },
+  {
+    "configOverrides": {},
+    "enabled": true,
+    "name": "console-mce"
+  }
+]

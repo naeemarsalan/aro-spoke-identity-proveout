@@ -1,0 +1,26 @@
+++[02:09:53Z] echo '=== PATH S (k8s) ==='
+=== PATH S (k8s) ===
+++[02:09:53Z] printf 'UAMIs: '
+UAMIs: ++[02:09:53Z] oc get userassignedidentities.managedidentity.azure.com -n aro-clusters --no-headers
+++[02:09:53Z] wc -l
+13
+++[02:09:55Z] printf 'RAs ready: '
+RAs ready: ++[02:09:55Z] ready aro-clusters
+++[02:09:55Z] oc get roleassignments.authorization.azure.com -n aro-clusters -o json
+++[02:09:55Z] jq '[.items[] | select(.status.conditions[]? | select(.type=="Ready" and .status=="True"))] | length'
+28
+++[02:09:56Z] echo '=== PATH W (k8s) ==='
+=== PATH W (k8s) ===
+++[02:09:56Z] printf 'UAMIs: '
+UAMIs: ++[02:09:56Z] oc get userassignedidentities.managedidentity.azure.com -n aro-clusters-wi --no-headers
+++[02:09:56Z] wc -l
+13
+++[02:09:57Z] printf 'RAs ready: '
+RAs ready: ++[02:09:57Z] ready aro-clusters-wi
+++[02:09:57Z] oc get roleassignments.authorization.azure.com -n aro-clusters-wi -o json
+++[02:09:57Z] jq '[.items[] | select(.status.conditions[]? | select(.type=="Ready" and .status=="True"))] | length'
+28
+++[02:09:58Z] oc get events -n aro-clusters-wi -o json
+++[02:09:58Z] jq -r '.items[] | select(.message | test("aso-credential")) | .message'
+++[02:09:58Z] sort -u
+Using credential from "aro-clusters-wi/aso-credential"

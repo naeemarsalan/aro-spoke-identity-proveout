@@ -1,0 +1,2 @@
+v1api20240610preview served=true storage=false
+v1api20240610previewstorage served=true storage=true

@@ -1,0 +1,9 @@
+++[00:31:44Z] az identity create -g openenv-ftcqh -n smoke-canary -o none
++++[00:31:48Z] az identity show -g openenv-ftcqh -n smoke-canary --query principalId -o tsv
+++[00:31:51Z] CANARY_OID=bc5154e7-e1fb-4b10-b156-aace905b3684
+++[00:31:51Z] n=0
+++[00:31:51Z] az role assignment create --assignee-object-id bc5154e7-e1fb-4b10-b156-aace905b3684 --assignee-principal-type ServicePrincipal --role Reader --scope /subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe/resourceGroups/openenv-ftcqh -o none
+++[00:31:55Z] az role assignment delete --assignee bc5154e7-e1fb-4b10-b156-aace905b3684 --role Reader --scope /subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe/resourceGroups/openenv-ftcqh
+++[00:32:01Z] az identity delete -g openenv-ftcqh -n smoke-canary
+++[00:32:07Z] echo 'GATE 0.2 PASS: identity create + role-assignment write + cleanup all succeeded'
+GATE 0.2 PASS: identity create + role-assignment write + cleanup all succeeded

@@ -1,0 +1,12 @@
+hypershift-local-hosting                 false
+hypershift                               false
+cluster-api                              true
+cluster-api-provider-aws                 false
+cluster-api-provider-azure-preview       true
+cluster-api-provider-metal3              false
+cluster-api-provider-openshift-assisted  false
+azureserviceoperator-controller-manager   1/1     1            1           88s
+capi-controller-manager                   1/1     1            1           92s
+capz-controller-manager                   1/1     1            1           88s
+mce-capi-webhook-config                   1/1     1            1           92s
+No resources found in hypershift namespace.

@@ -1,0 +1,14 @@
+NAME                                  CLUSTERCLASS   AVAILABLE   CP DESIRED   CP AVAILABLE   CP UP-TO-DATE   W DESIRED   W AVAILABLE   W UP-TO-DATE   PHASE          AGE   VERSION
+cluster.cluster.x-k8s.io/spk3-ftcqh                  False                                                                                            Provisioning   2s    
+
+NAME                                                    CLUSTER      READY   PROVISIONED
+arocluster.infrastructure.cluster.x-k8s.io/spk3-ftcqh   spk3-ftcqh           
+
+NAME                                                       CLUSTER      READY   CONSOLE URL
+arocontrolplane.controlplane.cluster.x-k8s.io/spk3-ftcqh   spk3-ftcqh   false   
+
+NAME                                                            READY   PROVISIONED   REPLICAS
+aromachinepool.infrastructure.cluster.x-k8s.io/spk3-ftcqh-mp1                         
+
+NAME                                          CLUSTER      DESIRED   CURRENT   READY   AVAILABLE   UP-TO-DATE   PHASE          AGE   VERSION
+machinepool.cluster.x-k8s.io/spk3-ftcqh-mp1   spk3-ftcqh   2                                       2            Provisioning   3s    

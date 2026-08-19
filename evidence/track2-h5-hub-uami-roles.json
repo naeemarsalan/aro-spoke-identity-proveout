@@ -1,0 +1,17 @@
+[
+  {
+    "p": "4c9f0e88-951b-406f-8625-fff103104fba",
+    "role": "Contributor",
+    "scope": "/subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe"
+  },
+  {
+    "p": "4bf2c774-a39f-492b-a448-15f25830e337",
+    "role": "Contributor",
+    "scope": "/subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe"
+  },
+  {
+    "p": "4bf2c774-a39f-492b-a448-15f25830e337",
+    "role": "Role Based Access Control Administrator",
+    "scope": "/subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe"
+  }
+]

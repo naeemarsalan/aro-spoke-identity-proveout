@@ -1,0 +1,8 @@
+⚠  NON CI mode - required variables:  DEPLOYMENT_ENV AZURE_SUBSCRIPTION_ID AZURE_TENANT_ID AZURE_CLIENT_ID AZURE_CLIENT_SECRET
+AZURE_SUBSCRIPTION_NAME=pool-01-391 <8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe>
+ENV=stage - AZURE_SUBSCRIPTION_NAME=pool-01-391 AZURE_SUBSCRIPTION_ID=8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe, REGION=eastus
+AZURE_TENANT_ID=64dc69e4-d083-49fc-9569-ebece1dd1408
+AZURE_CLIENT_ID=0fb23eb4-e762-4801-b762-3975122ad073 AZURE_ASO_CLIENT_ID=0e9a1f08-c290-42cb-9507-e72a8fd59813
+creating: /home/anaeem/aro-acm/track2/gen-wi/credentials.yaml
+creating: /home/anaeem/aro-acm/track2/gen-wi/is.yaml
+creating: /home/anaeem/aro-acm/track2/gen-wi/aro-aso.yaml

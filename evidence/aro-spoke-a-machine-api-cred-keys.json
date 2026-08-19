@@ -1,0 +1,9 @@
+[
+  "azure_client_id",
+  "azure_client_secret",
+  "azure_region",
+  "azure_resource_prefix",
+  "azure_resourcegroup",
+  "azure_subscription_id",
+  "azure_tenant_id"
+]

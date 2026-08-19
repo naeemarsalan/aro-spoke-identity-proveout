@@ -1,0 +1,35 @@
+++[02:09:59Z] echo '=== PATH S (Azure) ==='
+=== PATH S (Azure) ===
+++[02:09:59Z] az group show -n spk1-ftcqh-resgroup --query properties.provisioningState -o tsv
+Succeeded
+++[02:10:02Z] printf 'UAMI count: '
+UAMI count: ++[02:10:02Z] az identity list -g spk1-ftcqh-resgroup --query 'length(@)' -o tsv
+13
+++[02:10:04Z] printf 'RG-scope role assignments: '
+RG-scope role assignments: ++[02:10:04Z] az role assignment list --all --query 'length([?contains(scope, '\''spk1-ftcqh-resgroup'\'')])' -o tsv
+28
+++[02:10:08Z] echo '=== PATH W (Azure) ==='
+=== PATH W (Azure) ===
+++[02:10:08Z] az group show -n spk2-ftcqh-resgroup --query properties.provisioningState -o tsv
+Succeeded
+++[02:10:10Z] printf 'UAMI count: '
+UAMI count: ++[02:10:10Z] az identity list -g spk2-ftcqh-resgroup --query 'length(@)' -o tsv
+13
+++[02:10:13Z] printf 'RG-scope role assignments: '
+RG-scope role assignments: ++[02:10:13Z] az role assignment list --all --query 'length([?contains(scope, '\''spk2-ftcqh-resgroup'\'')])' -o tsv
+28
+++[02:10:18Z] az identity list -g spk2-ftcqh-resgroup --query '[].name' -o tsv
+++[02:10:18Z] sort
+hcp-spk2-ftcqh-cp-cloud-controller-manager-5254c8
+hcp-spk2-ftcqh-cp-cloud-network-config-5254c8
+hcp-spk2-ftcqh-cp-cluster-api-azure-5254c8
+hcp-spk2-ftcqh-cp-control-plane-5254c8
+hcp-spk2-ftcqh-cp-disk-csi-driver-5254c8
+hcp-spk2-ftcqh-cp-file-csi-driver-5254c8
+hcp-spk2-ftcqh-cp-image-registry-5254c8
+hcp-spk2-ftcqh-cp-ingress-5254c8
+hcp-spk2-ftcqh-cp-kms-5254c8
+hcp-spk2-ftcqh-dp-disk-csi-driver-5254c8
+hcp-spk2-ftcqh-dp-file-csi-driver-5254c8
+hcp-spk2-ftcqh-dp-image-registry-5254c8
+hcp-spk2-ftcqh-service-managed-identity-5254c8

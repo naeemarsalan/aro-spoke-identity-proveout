@@ -1,0 +1,44 @@
+++[02:34:22Z] az aro list -g openenv-ftcqh -o table
+
+++[02:34:24Z] printf 'identities remaining: '
+identities remaining: ++[02:34:24Z] az identity list -g openenv-ftcqh --query 'length(@)' -o tsv
+0
+++[02:34:26Z] printf 'managed RGs (aro-*): '
+managed RGs (aro-*): ++[02:34:26Z] wc -l
+++[02:34:26Z] az group list --query '[?starts_with(name,'\''aro-'\'')].name' -o tsv
+0
+++[02:34:29Z] az network vnet delete -g openenv-ftcqh -n aro-spoke-a-vnet
+++[02:34:35Z] az network vnet delete -g openenv-ftcqh -n aro-spoke-b-vnet
+++[02:34:50Z] echo 'vnets deleted'
+vnets deleted
+++[02:34:50Z] cut -f2 /home/anaeem/aro-acm/evidence/identity-principals.tsv
+++[02:34:51Z] cat /home/anaeem/aro-acm/evidence/track2-hub-uami-principals.txt
+++[02:34:51Z] '[' -s /home/anaeem/aro-acm/evidence/a0-sp-object-id.txt ']'
++++[02:34:51Z] grep -F -f /home/anaeem/aro-acm/evidence/run-principals.txt
++++[02:34:51Z] az role assignment list --scope /subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe/resourceGroups/openenv-ftcqh --query '[?contains(scope, '\''resourceGroups/openenv-ftcqh'\'')].[principalId,id]' -o tsv
++++[02:34:51Z] cut -f2
++++[02:34:51Z] local _cc_a
++++[02:34:51Z] for _cc_a in ${1+"$@"}
++++[02:34:51Z] case "$_cc_a" in
++++[02:34:51Z] for _cc_a in ${1+"$@"}
++++[02:34:51Z] case "$_cc_a" in
++++[02:34:51Z] for _cc_a in ${1+"$@"}
++++[02:34:51Z] case "$_cc_a" in
++++[02:34:51Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
++++[02:34:51Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
++++[02:34:51Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
++++[02:34:51Z] [[ -n '' ]]
++++[02:34:51Z] [[ linux-gnu == msys ]]
++++[02:34:51Z] [[ linux-gnu == cygwin ]]
++++[02:34:51Z] [[ linux-gnu == win32 ]]
++++[02:34:51Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -F -f /home/anaeem/aro-acm/evidence/run-principals.txt
+++[02:34:53Z] SWEPT=
+++[02:34:53Z] '[' -n '' ']'
+++[02:34:53Z] echo 'no orphaned RG-scope assignments'
+no orphaned RG-scope assignments
+++[02:34:53Z] echo '=== FINAL: resources remaining in openenv-ftcqh ==='
+=== FINAL: resources remaining in openenv-ftcqh ===
+++[02:34:53Z] az resource list -g openenv-ftcqh -o table
+Name                            ResourceGroup    Location    Type                        Status
+------------------------------  ---------------  ----------  --------------------------  ---------
+ftcqh.azure.redhatworkshops.io  openenv-ftcqh    global      Microsoft.Network/dnszones  Succeeded

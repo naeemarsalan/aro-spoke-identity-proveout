@@ -1,0 +1,118 @@
+++[02:03:28Z] echo '=== Service accounts ==='
+=== Service accounts ===
++++[02:03:28Z] oc get deploy capz-controller-manager -n multicluster-engine -o 'jsonpath={.spec.template.spec.serviceAccountName}'
+++[02:03:29Z] CAPZ_SA=capz-manager
++++[02:03:29Z] oc get deploy azureserviceoperator-controller-manager -n multicluster-engine -o 'jsonpath={.spec.template.spec.serviceAccountName}'
+++[02:03:30Z] ASO_SA=azureserviceoperator-default
+++[02:03:30Z] echo 'capz SA: capz-manager'
+capz SA: capz-manager
+++[02:03:30Z] echo 'aso SA: azureserviceoperator-default'
+aso SA: azureserviceoperator-default
+++[02:03:30Z] echo '=== Token projection: capz ==='
+=== Token projection: capz ===
+++[02:03:30Z] oc get deploy capz-controller-manager -n multicluster-engine -o json
+++[02:03:30Z] jq '.spec.template.spec.volumes[] | select(.projected.sources[]?.serviceAccountToken)'
+{
+  "name": "azure-identity-token",
+  "projected": {
+    "defaultMode": 420,
+    "sources": [
+      {
+        "serviceAccountToken": {
+          "audience": "api://AzureADTokenExchange",
+          "expirationSeconds": 3600,
+          "path": "azure-identity-token"
+        }
+      }
+    ]
+  }
+}
+++[02:03:30Z] jq '.spec.template.spec.containers[].volumeMounts[]? | select(.name | test("token|identity"))'
+++[02:03:30Z] oc get deploy capz-controller-manager -n multicluster-engine -o json
+{
+  "mountPath": "/var/run/secrets/azure/tokens",
+  "name": "azure-identity-token",
+  "readOnly": true
+}
+++[02:03:31Z] echo '=== Token projection: aso ==='
+=== Token projection: aso ===
+++[02:03:31Z] oc get deploy azureserviceoperator-controller-manager -n multicluster-engine -o json
+++[02:03:31Z] jq '.spec.template.spec.volumes[] | select(.projected.sources[]?.serviceAccountToken)'
+{
+  "name": "azure-identity",
+  "projected": {
+    "defaultMode": 420,
+    "sources": [
+      {
+        "serviceAccountToken": {
+          "audience": "api://AzureADTokenExchange",
+          "expirationSeconds": 3600,
+          "path": "azure-identity"
+        }
+      }
+    ]
+  }
+}
+++[02:03:32Z] oc get deploy azureserviceoperator-controller-manager -n multicluster-engine -o json
+++[02:03:32Z] jq '.spec.template.spec.containers[].volumeMounts[]? | select(.name | test("token|identity"))'
+{
+  "mountPath": "/var/run/secrets/tokens",
+  "name": "azure-identity",
+  "readOnly": true
+}
+++[02:03:32Z] echo '=== Images ==='
+=== Images ===
+++[02:03:32Z] oc get deploy capi-controller-manager capz-controller-manager azureserviceoperator-controller-manager -n multicluster-engine -o 'jsonpath={range .items[*]}{.metadata.name}: {.spec.template.spec.containers[*].image}{"\n"}{end}'
+capi-controller-manager: registry.redhat.io/openshift4/ose-cluster-api-rhel9@sha256:5077070e7eb6736b6f716f3f41fe882fd4c2269440538d8891f53af6e3963cdd
+capz-controller-manager: registry.redhat.io/multicluster-engine/cluster-api-provider-azure-rhel9@sha256:c78e5e3594fb95a0d80f1a6898d60a6bee35a6f8419a281cb9dde56b864cc56a
+azureserviceoperator-controller-manager: registry.redhat.io/multicluster-engine/azure-service-operator-rhel9@sha256:c43dce152f9dbb080a6f47cf65d03d1219db5bedea8794fc96e3b67b43c6d1b4
+++[02:03:33Z] echo '=== CAPZ args (feature gates + crd handling) ==='
+=== CAPZ args (feature gates + crd handling) ===
+++[02:03:33Z] jq .
+++[02:03:33Z] oc get deploy capz-controller-manager -n multicluster-engine -o 'jsonpath={.spec.template.spec.containers[0].args}'
+[
+  "--leader-elect",
+  "--diagnostics-address=:8443",
+  "--insecure-diagnostics=false",
+  "--feature-gates=MachinePool=true,AKSResourceHealth=false,EdgeZone=false,ASOAPI=true,APIServerILB=false,ARO=true",
+  "--v=0"
+]
+++[02:03:34Z] oc get deploy azureserviceoperator-controller-manager -n multicluster-engine -o 'jsonpath={.spec.template.spec.containers[0].args}'
+++[02:03:34Z] jq .
+[
+  "--metrics-addr=0.0.0.0:8443",
+  "--secure-metrics=true",
+  "--profiling-metrics=false",
+  "--health-addr=:8081",
+  "--enable-leader-election",
+  "--v=2",
+  "--crd-pattern=resources.azure.com/*;containerservice.azure.com/*;keyvault.azure.com/*;managedidentity.azure.com/*;eventhub.azure.com/*;network.azure.com/*;authorization.azure.com/*",
+  "--webhook-port=9443",
+  "--webhook-cert-dir=/tmp/k8s-webhook-server/serving-certs",
+  "--crd-management=none"
+]
+++[02:03:35Z] echo '=== ARO / HCP CRDs shipped ==='
+=== ARO / HCP CRDs shipped ===
+++[02:03:35Z] oc get crd
+++[02:03:35Z] grep -Ei 'arocluster|arocontrolplane|aromachinepool|hcpopenshift|redhatopenshift'
+++[02:03:35Z] local _cc_a
+++[02:03:35Z] for _cc_a in ${1+"$@"}
+++[02:03:35Z] case "$_cc_a" in
+++[02:03:35Z] for _cc_a in ${1+"$@"}
+++[02:03:35Z] case "$_cc_a" in
+++[02:03:35Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
+++[02:03:35Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:03:35Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:03:35Z] [[ -n '' ]]
+++[02:03:35Z] [[ linux-gnu == msys ]]
+++[02:03:35Z] [[ linux-gnu == cygwin ]]
+++[02:03:35Z] [[ linux-gnu == win32 ]]
+++[02:03:35Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -Ei 'arocluster|arocontrolplane|aromachinepool|hcpopenshift|redhatopenshift'
+aroclusters.infrastructure.cluster.x-k8s.io                               2026-08-18T02:01:09Z
+arocontrolplanes.controlplane.cluster.x-k8s.io                            2026-08-18T02:01:09Z
+aromachinepools.infrastructure.cluster.x-k8s.io                           2026-08-18T02:01:09Z
+hcpopenshiftclusters.redhatopenshift.azure.com                            2026-08-18T02:01:11Z
+hcpopenshiftclustersexternalauths.redhatopenshift.azure.com               2026-08-18T02:01:11Z
+hcpopenshiftclustersnodepools.redhatopenshift.azure.com                   2026-08-18T02:01:11Z
+++[02:03:36Z] echo capz-manager
+++[02:03:36Z] echo azureserviceoperator-default

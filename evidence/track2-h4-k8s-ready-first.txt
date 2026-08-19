@@ -1,0 +1,29 @@
+++[02:05:27Z] printf 'UAMIs: '
+UAMIs: ++[02:05:27Z] oc get userassignedidentities.managedidentity.azure.com -n aro-clusters --no-headers
+++[02:05:27Z] wc -l
+13
+++[02:05:28Z] printf 'identity-maps: '
+identity-maps: ++[02:05:28Z] oc get cm -n aro-clusters --no-headers
+++[02:05:28Z] grep -c identity-map
+++[02:05:28Z] local _cc_a
+++[02:05:28Z] for _cc_a in ${1+"$@"}
+++[02:05:28Z] case "$_cc_a" in
+++[02:05:28Z] for _cc_a in ${1+"$@"}
+++[02:05:28Z] case "$_cc_a" in
+++[02:05:28Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
+++[02:05:28Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:05:28Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:05:28Z] [[ -n '' ]]
+++[02:05:28Z] [[ linux-gnu == msys ]]
+++[02:05:28Z] [[ linux-gnu == cygwin ]]
+++[02:05:28Z] [[ linux-gnu == win32 ]]
+++[02:05:28Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -c identity-map
+13
+++[02:05:29Z] printf 'RAs total: '
+RAs total: ++[02:05:29Z] wc -l
+++[02:05:29Z] oc get roleassignments.authorization.azure.com -n aro-clusters --no-headers
+28
+++[02:05:30Z] printf 'RAs ready: '
+RAs ready: ++[02:05:30Z] oc get roleassignments.authorization.azure.com -n aro-clusters -o json
+++[02:05:30Z] jq '[.items[] | select(.status.conditions[]? | select(.type=="Ready" and .status=="True"))] | length'
+3

@@ -1,0 +1,12 @@
+++[01:55:24Z] oc whoami --show-server
+https://api.fwpgmd1x.eastus.aroapp.io:6443
+++[01:55:24Z] oc get clusterversion version -o 'jsonpath={.status.desired.version}{"\n"}'
+4.19.24
+++[01:55:25Z] oc get catalogsource -n openshift-marketplace
+NAME                  DISPLAY               TYPE   PUBLISHER   AGE
+certified-operators   Certified Operators   grpc   Red Hat     51m
+community-operators   Community Operators   grpc   Red Hat     51m
+redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     51m
+redhat-operators      Red Hat Operators     grpc   Red Hat     51m
+++[01:55:25Z] oc get operatorhub cluster -o 'jsonpath={.spec}{"\n"}'
+{}

@@ -1,0 +1,209 @@
+++[02:19:39Z] echo '=== hcpopenshiftclusters in aro-clusters ==='
+=== hcpopenshiftclusters in aro-clusters ===
+++[02:19:39Z] oc get hcpopenshiftclusters -n aro-clusters
+No resources found in aro-clusters namespace.
+++[02:19:40Z] echo '=== AROControlPlane status ==='
+=== AROControlPlane status ===
+++[02:19:40Z] jq '{ready: .status.ready, initialized: .status.initialized, conditions: .status.conditions}'
+++[02:19:40Z] oc get arocontrolplane spk3-ftcqh -n aro-clusters -o json
+{
+  "ready": false,
+  "initialized": null,
+  "conditions": [
+    {
+      "lastTransitionTime": "2026-08-18T02:12:56Z",
+      "message": "Waiting for KeyVault to be created",
+      "observedGeneration": 1,
+      "reason": "WaitingForVault",
+      "status": "False",
+      "type": "EncryptionKeyReady"
+    },
+    {
+      "lastTransitionTime": "2026-08-18T02:12:56Z",
+      "message": "HcpOpenShiftCluster spk3-ftcqh does not exist yet",
+      "observedGeneration": 1,
+      "reason": "HcpOpenShiftClusterNotFound",
+      "status": "False",
+      "type": "HcpClusterReady"
+    }
+  ]
+}
+++[02:19:41Z] echo '=== AROCluster status ==='
+=== AROCluster status ===
+++[02:19:41Z] oc get arocluster spk3-ftcqh -n aro-clusters -o json
+++[02:19:41Z] jq '{ready: .status.ready, conditions: .status.conditions}'
+{
+  "ready": null,
+  "conditions": [
+    {
+      "lastTransitionTime": "2026-08-18T02:12:55Z",
+      "message": "Waiting for the Control Plane to get ready",
+      "observedGeneration": 1,
+      "reason": "ExternallyManagedControlPlane",
+      "status": "False",
+      "type": "NetworkInfrastructureReady"
+    },
+    {
+      "lastTransitionTime": "2026-08-18T02:12:55Z",
+      "message": "All 48 infrastructure resources are ready",
+      "observedGeneration": 1,
+      "reason": "InfrastructureReady",
+      "status": "True",
+      "type": "ResourcesReady"
+    }
+  ]
+}
+++[02:19:41Z] echo '=== embedded infra readiness (spk3) ==='
+=== embedded infra readiness (spk3) ===
+++[02:19:41Z] oc get resourcegroups.resources.azure.com,virtualnetworks.network.azure.com,networksecuritygroups.network.azure.com,vaults.keyvault.azure.com -n aro-clusters
+++[02:19:41Z] grep spk3
+++[02:19:41Z] local _cc_a
+++[02:19:41Z] for _cc_a in ${1+"$@"}
+++[02:19:41Z] case "$_cc_a" in
+++[02:19:41Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
+++[02:19:41Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:41Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:41Z] [[ -n '' ]]
+++[02:19:41Z] [[ linux-gnu == msys ]]
+++[02:19:41Z] [[ linux-gnu == cygwin ]]
+++[02:19:41Z] [[ linux-gnu == win32 ]]
+++[02:19:41Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl spk3
+resourcegroup.resources.azure.com/spk3-ftcqh-resgroup   True               Succeeded   
+virtualnetwork.network.azure.com/spk3-ftcqh-vnet   True               Succeeded   
+networksecuritygroup.network.azure.com/spk3-ftcqh-nsg   True               Succeeded   
+vault.keyvault.azure.com/spk3-ftcqh-kv   True               Succeeded   
+++[02:19:43Z] printf 'spk3 UAMIs: '
+spk3 UAMIs: ++[02:19:43Z] grep -c spk3
+++[02:19:43Z] oc get userassignedidentities.managedidentity.azure.com -n aro-clusters --no-headers
+++[02:19:43Z] local _cc_a
+++[02:19:43Z] for _cc_a in ${1+"$@"}
+++[02:19:43Z] case "$_cc_a" in
+++[02:19:43Z] for _cc_a in ${1+"$@"}
+++[02:19:43Z] case "$_cc_a" in
+++[02:19:43Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
+++[02:19:43Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:43Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:43Z] [[ -n '' ]]
+++[02:19:43Z] [[ linux-gnu == msys ]]
+++[02:19:43Z] [[ linux-gnu == cygwin ]]
+++[02:19:43Z] [[ linux-gnu == win32 ]]
+++[02:19:43Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -c spk3
+13
+++[02:19:44Z] printf 'spk3 RAs ready: '
+spk3 RAs ready: ++[02:19:44Z] oc get roleassignments.authorization.azure.com -n aro-clusters -o json
+++[02:19:44Z] jq '[.items[] | select(.metadata.name | test("spk3")) | select(.status.conditions[]? | select(.type=="Ready" and .status=="True"))] | length'
+29
+++[02:19:46Z] echo '=== capz-controller-manager logs (spk3 + errors, last 200) ==='
+=== capz-controller-manager logs (spk3 + errors, last 200) ===
+++[02:19:46Z] oc logs -n multicluster-engine deployment/capz-controller-manager --tail=200
+++[02:19:46Z] grep -iE 'spk3|error|hcpopenshift'
+++[02:19:46Z] tail -25
+++[02:19:46Z] local _cc_a
+++[02:19:46Z] for _cc_a in ${1+"$@"}
+++[02:19:46Z] case "$_cc_a" in
+++[02:19:46Z] for _cc_a in ${1+"$@"}
+++[02:19:46Z] case "$_cc_a" in
+++[02:19:46Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
+++[02:19:46Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:46Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:46Z] [[ -n '' ]]
+++[02:19:46Z] [[ linux-gnu == msys ]]
+++[02:19:46Z] [[ linux-gnu == cygwin ]]
+++[02:19:46Z] [[ linux-gnu == win32 ]]
+++[02:19:46Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -iE 'spk3|error|hcpopenshift'
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="addc5043-c6b6-4d3a-b38e-1f188e91729a"
+I0818 02:13:48.071403       1 arocontrolplane_controller.go:367] "Reconciling AROControlPlane" logger="controllers.AROControlPlaneReconciler.reconcileNormal" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="3f46303a-965e-4e3e-8d62-a229b1903063" x-ms-correlation-request-id="215f0c6b-df5a-44e2-9899-0a84329d9d46"
+I0818 02:13:48.071716       1 arocontrolplane_reconciler.go:121] "Using resources mode for AROControlPlane reconciliation" logger="controllers.aroControlPlaneService.Reconcile" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="3f46303a-965e-4e3e-8d62-a229b1903063" x-ms-correlation-request-id="215f0c6b-df5a-44e2-9899-0a84329d9d46"
+I0818 02:13:48.071802       1 arocontrolplane_reconciler.go:288] "AROCluster infrastructure is ready, proceeding with HcpOpenShiftCluster creation" logger="controllers.aroControlPlaneService.reconcileResources" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="3f46303a-965e-4e3e-8d62-a229b1903063" x-ms-correlation-request-id="215f0c6b-df5a-44e2-9899-0a84329d9d46"
+E0818 02:13:48.082958       1 controller.go:353] "Reconciler error" err=<
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="3f46303a-965e-4e3e-8d62-a229b1903063"
+I0818 02:14:29.055117       1 arocontrolplane_controller.go:367] "Reconciling AROControlPlane" logger="controllers.AROControlPlaneReconciler.reconcileNormal" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="b015c6c9-9bbe-448b-8ed5-9047d757ebe9" x-ms-correlation-request-id="783cfd0a-f732-48d5-8b3a-a7775eb92512"
+I0818 02:14:29.055525       1 arocontrolplane_reconciler.go:121] "Using resources mode for AROControlPlane reconciliation" logger="controllers.aroControlPlaneService.Reconcile" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="b015c6c9-9bbe-448b-8ed5-9047d757ebe9" x-ms-correlation-request-id="783cfd0a-f732-48d5-8b3a-a7775eb92512"
+I0818 02:14:29.055609       1 arocontrolplane_reconciler.go:288] "AROCluster infrastructure is ready, proceeding with HcpOpenShiftCluster creation" logger="controllers.aroControlPlaneService.reconcileResources" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="b015c6c9-9bbe-448b-8ed5-9047d757ebe9" x-ms-correlation-request-id="783cfd0a-f732-48d5-8b3a-a7775eb92512"
+E0818 02:14:29.067926       1 controller.go:353] "Reconciler error" err=<
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="b015c6c9-9bbe-448b-8ed5-9047d757ebe9"
+I0818 02:15:51.000143       1 arocontrolplane_controller.go:367] "Reconciling AROControlPlane" logger="controllers.AROControlPlaneReconciler.reconcileNormal" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="954a5813-0e58-4ea0-b61b-138f7d80b165" x-ms-correlation-request-id="036d8d04-66b7-43f0-a243-a8d9e1c29678"
+I0818 02:15:51.000451       1 arocontrolplane_reconciler.go:121] "Using resources mode for AROControlPlane reconciliation" logger="controllers.aroControlPlaneService.Reconcile" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="954a5813-0e58-4ea0-b61b-138f7d80b165" x-ms-correlation-request-id="036d8d04-66b7-43f0-a243-a8d9e1c29678"
+I0818 02:15:51.000544       1 arocontrolplane_reconciler.go:288] "AROCluster infrastructure is ready, proceeding with HcpOpenShiftCluster creation" logger="controllers.aroControlPlaneService.reconcileResources" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="954a5813-0e58-4ea0-b61b-138f7d80b165" x-ms-correlation-request-id="036d8d04-66b7-43f0-a243-a8d9e1c29678"
+E0818 02:15:51.011023       1 controller.go:353] "Reconciler error" err=<
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="954a5813-0e58-4ea0-b61b-138f7d80b165"
+I0818 02:18:34.862573       1 arocontrolplane_controller.go:367] "Reconciling AROControlPlane" logger="controllers.AROControlPlaneReconciler.reconcileNormal" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="e165c976-de35-4d60-ba68-58760e0c0fb1" x-ms-correlation-request-id="fbc6d960-6b19-4fb8-970c-e109731c62a4"
+I0818 02:18:34.862934       1 arocontrolplane_reconciler.go:121] "Using resources mode for AROControlPlane reconciliation" logger="controllers.aroControlPlaneService.Reconcile" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="e165c976-de35-4d60-ba68-58760e0c0fb1" x-ms-correlation-request-id="fbc6d960-6b19-4fb8-970c-e109731c62a4"
+I0818 02:18:34.863019       1 arocontrolplane_reconciler.go:288] "AROCluster infrastructure is ready, proceeding with HcpOpenShiftCluster creation" logger="controllers.aroControlPlaneService.reconcileResources" controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="e165c976-de35-4d60-ba68-58760e0c0fb1" x-ms-correlation-request-id="fbc6d960-6b19-4fb8-970c-e109731c62a4"
+E0818 02:18:34.873467       1 controller.go:353] "Reconciler error" err=<
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="e165c976-de35-4d60-ba68-58760e0c0fb1"
+++[02:19:47Z] echo '=== events (spk3) ==='
+=== events (spk3) ===
+++[02:19:47Z] oc get events -n aro-clusters --sort-by=.lastTimestamp
+++[02:19:47Z] grep -i spk3
+++[02:19:47Z] tail -15
+++[02:19:47Z] local _cc_a
+++[02:19:47Z] for _cc_a in ${1+"$@"}
+++[02:19:47Z] case "$_cc_a" in
+++[02:19:47Z] for _cc_a in ${1+"$@"}
+++[02:19:47Z] case "$_cc_a" in
+++[02:19:47Z] local _cc_bin=/home/anaeem/.local/share/claude/versions/2.1.233
+++[02:19:47Z] [[ -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:47Z] [[ ! -x /home/anaeem/.local/share/claude/versions/2.1.233 ]]
+++[02:19:47Z] [[ -n '' ]]
+++[02:19:47Z] [[ linux-gnu == msys ]]
+++[02:19:47Z] [[ linux-gnu == cygwin ]]
+++[02:19:47Z] [[ linux-gnu == win32 ]]
+++[02:19:47Z] exec -a ugrep /home/anaeem/.local/share/claude/versions/2.1.233 -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -i spk3
+7m          Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-readerroleid-cloudnetworkconfigmi              Using credential from "aro-clusters/aso-credential"
+6m59s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-hcpservicemanagedidentityroleid-nsg            Using credential from "aro-clusters/aso-credential"
+6m59s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-federatedcredentialsroleid-dpimageregistrymi   Using credential from "aro-clusters/aso-credential"
+6m59s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-readerroleid-kmsmi                             Using credential from "aro-clusters/aso-credential"
+6m59s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-readerroleid-cloudcontrollermanagermi          Using credential from "aro-clusters/aso-credential"
+6m58s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-readerroleid-filecsidrivermi                   Using credential from "aro-clusters/aso-credential"
+6m58s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-federatedcredentialsroleid-dpfilecsidrivermi   Using credential from "aro-clusters/aso-credential"
+6m58s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-readerroleid-imageregistrymi                   Using credential from "aro-clusters/aso-credential"
+6m58s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-readerroleid-diskcsidrivermi                   Using credential from "aro-clusters/aso-credential"
+6m57s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-cp-control-plane-5254c8-hcpcontrolplaneoperatorroleid-nsg                      Using credential from "aro-clusters/aso-credential"
+6m57s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-cp-control-plane-5254c8-hcpcontrolplaneoperatorroleid-vnet                     Using credential from "aro-clusters/aso-credential"
+6m57s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-service-managed-identity-5254c8-hcpservicemanagedidentityroleid-subnet         Using credential from "aro-clusters/aso-credential"
+6m56s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-cp-cluster-api-azure-5254c8-hcpclusterapiproviderroleid-subnet                 Using credential from "aro-clusters/aso-credential"
+6m56s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-cp-cloud-controller-manager-5254c8-cloudcontrollermanagerroleid-subnet         Using credential from "aro-clusters/aso-credential"
+6m56s       Normal    CredentialFrom              roleassignment/hcp-spk3-ftcqh-cp-cloud-controller-manager-5254c8-cloudcontrollermanagerroleid-nsg            Using credential from "aro-clusters/aso-credential"
+++[02:21:14Z] echo '=== hcpopenshiftclusters ==='
+=== hcpopenshiftclusters ===
+++[02:21:14Z] oc get hcpopenshiftclusters -n aro-clusters
+NAME         READY   SEVERITY   REASON                MESSAGE
+spk3-ftcqh   False   Error      InvalidResourceType   The resource type could not be found in the namespace 'Microsoft.RedHatOpenShift' for api version '2024-06-10-preview'.: PUT https://management.azure.com/subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe/resourceGroups/spk3-ftcqh-resgroup/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/spk3-ftcqh...
+++[02:21:15Z] oc get hcpopenshiftclusters spk3-ftcqh -n aro-clusters
+++[02:21:15Z] echo '=== conditions ==='
+=== conditions ===
+++[02:21:15Z] jq .status.conditions
+++[02:21:15Z] oc get hcpopenshiftclusters spk3-ftcqh -n aro-clusters -o json
+[
+  {
+    "lastTransitionTime": "2026-08-18T02:21:05Z",
+    "message": "The resource type could not be found in the namespace 'Microsoft.RedHatOpenShift' for api version '2024-06-10-preview'.: PUT https://management.azure.com/subscriptions/8e15b613-d1f9-41a6-a23d-e8b3ce94d6fe/resourceGroups/spk3-ftcqh-resgroup/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/spk3-ftcqh\n--------------------------------------------------------------------------------\nRESPONSE 404: 404 Not Found\nERROR CODE: InvalidResourceType\n--------------------------------------------------------------------------------\n{\n  \"error\": {\n    \"code\": \"InvalidResourceType\",\n    \"message\": \"The resource type could not be found in the namespace 'Microsoft.RedHatOpenShift' for api version '2024-06-10-preview'.\"\n  }\n}\n--------------------------------------------------------------------------------\n",
+    "observedGeneration": 1,
+    "reason": "InvalidResourceType",
+    "severity": "Error",
+    "status": "False",
+    "type": "Ready"
+  }
+]
+++[02:21:16Z] echo '=== latest capz reconcile errors ==='
+=== latest capz reconcile errors ===
+++[02:21:16Z] oc logs -n multicluster-engine deployment/capz-controller-manager --tail=100
+++[02:21:16Z] tail -12
+++[02:21:16Z] sed -n '/Reconciler error/,/^ >/p'
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="b015c6c9-9bbe-448b-8ed5-9047d757ebe9"
+E0818 02:15:51.011023       1 controller.go:353] "Reconciler error" err=<
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="954a5813-0e58-4ea0-b61b-138f7d80b165"
+E0818 02:18:34.873467       1 controller.go:353] "Reconciler error" err=<
+	error creating AROControlPlane aro-clusters/spk3-ftcqh: failed to reconcile ASO resources: failed to apply resource: failed to create typed patch object (aro-clusters/spk3-ftcqh; redhatopenshift.azure.com/v1api20240610previewstorage, Kind=HcpOpenShiftCluster): errors:
+	  .spec.properties.platform.vnetIntegrationSubnetReference: field not declared in schema
+	  .spec.properties.etcd.dataEncryption.customerManaged.kms.vaultName: field not declared in schema
+ > controller="arocontrolplane" controllerGroup="controlplane.cluster.x-k8s.io" controllerKind="AROControlPlane" AROControlPlane="aro-clusters/spk3-ftcqh" namespace="aro-clusters" name="spk3-ftcqh" reconcileID="e165c976-de35-4d60-ba68-58760e0c0fb1"

@@ -1,0 +1,1 @@
+CAPZ_SA=capz-manager ASO_SA=azureserviceoperator-default
